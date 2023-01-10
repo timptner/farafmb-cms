@@ -2,7 +2,10 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap');
 
-$cyan: #009EE3;
+@import "../bulma/sass/utilities/initial-variables.sass";
+
+$cyan: #009ee3;
+$cyan-dark: #0483b9;
 
 // Global variables
 $family-sans-serif: "Comfortaa", sans-serif;
@@ -11,4 +14,22 @@ $primary: $cyan;
 // Component variables
 $input-shadow: none;
 
+// Navbar
+$navbar-background-color: $primary;
+$navbar-item-img-max-height: 2.5rem;
+$navbar-item-color: $white;
+$navbar-item-hover-color: $white;
+$navbar-item-hover-background-color: $cyan-dark;
+$navbar-dropdown-background-color: $cyan-dark;
+$navbar-dropdown-item-hover-background-color: $cyan;
+$navbar-dropdown-item-hover-color: $white;
+
 @import "../bulma/bulma.sass";
+
+@include touch{
+  .navbar {
+    .navbar-menu {
+      background-color: $cyan-dark;
+    }
+  }
+}
