@@ -15,21 +15,54 @@ $primary: $cyan;
 $input-shadow: none;
 
 // Navbar
-$navbar-background-color: $primary;
-$navbar-item-img-max-height: 2.5rem;
-$navbar-item-color: $white;
-$navbar-item-hover-color: $white;
-$navbar-item-hover-background-color: $cyan-dark;
-$navbar-dropdown-background-color: $cyan-dark;
-$navbar-dropdown-item-hover-background-color: $cyan;
-$navbar-dropdown-item-hover-color: $white;
+//$navbar-background-color: $primary;
+$navbar-item-img-max-height: 4rem;
+//$navbar-item-color: $white;
+//$navbar-item-hover-color: $white;
+//$navbar-item-hover-background-color: $cyan-dark;
+//$navbar-dropdown-background-color: $cyan-dark;
+//$navbar-dropdown-item-hover-background-color: $cyan;
+//$navbar-dropdown-item-hover-color: $white;
 
 @import "../bulma/bulma.sass";
 
-@include touch{
-  .navbar {
-    .navbar-menu {
-      background-color: $cyan-dark;
+.navbar {
+  padding: 1rem;
+
+  .navbar-item {
+    margin: 1rem 0;
+
+    @include touch {
+      margin: 0;
     }
   }
+
+  .navbar-dropdown {
+    .navbar-item {
+      margin: 0;
+    }
+  }
+
+  .navbar-brand {
+    .navbar-item {
+      padding: 0.625rem;
+      margin: 0;
+    }
+
+    @include touch {
+      img {
+        max-height: 2rem;
+        max-width: 2rem;
+      }
+    }
+  }
+
 }
+
+//@include touch{
+//  .navbar {
+//    .navbar-menu {
+//      background-color: $cyan-dark;
+//    }
+//  }
+//}
