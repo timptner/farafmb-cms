@@ -1,8 +1,9 @@
 from django.db import models
 
-from wagtail.models import Page
-from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
+from wagtail.fields import RichTextField
+from wagtail.models import Page
+from wagtail.snippets.models import register_snippet
 
 
 class HomePage(Page):
@@ -21,3 +22,31 @@ class HomePage(Page):
         FieldPanel('body'),
         FieldPanel('image'),
     ]
+
+
+@register_snippet
+class FooterGroup(models.Model):
+    title = models.CharField(max_length=250)
+
+    panels = [
+        FieldPanel('title'),
+    ]
+
+    def __str__(self):
+        return self.title
+
+
+@register_snippet
+class FooterLink(models.Model):
+    title = models.CharField(max_length=250)
+    url = models.URLField()
+    group = models.ForeignKey(FooterGroup, on_delete=models.CASCADE)
+
+    panels = [
+        FieldPanel('title'),
+        FieldPanel('url'),
+        FieldPanel('group'),
+    ]
+
+    def __str__(self):
+        return self.title

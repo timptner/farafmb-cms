@@ -1,0 +1,15 @@
+<div class="columns is-centered">
+    {% for group in groups %}
+        <div class="column is-narrow">
+            <h6 class="title">{{ group.title }}</h6>
+
+            <ul class="list-clean">
+                {% for link in group.footerlink_set.all %}
+                    <li>
+                        <a href="{{ link.url }}">{{ link.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+</div>
