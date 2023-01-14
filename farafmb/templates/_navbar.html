@@ -1,4 +1,4 @@
-{% load static %}
+{% load static navigation_tags %}
 
 <nav class="navbar is-primary mb-6" role="navigation" aria-label="main navigation">
     <div class="container">
@@ -16,49 +16,12 @@
 
         <div id="navbarMain" class="navbar-menu">
             <div class="navbar-end">
-                <a class="navbar-item">
-                    Blog
-                </a>
-
-                <a class="navbar-item">
-                    Office Hours
-                </a>
-
-                <a class="navbar-item">
-                    Jobs
-                </a>
-
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link">
-                        About us
+                {% list_pages as pages %}
+                {% for page in pages %}
+                    <a class="navbar-item" href="{{ page.url }}">
+                        {{ page.title }}
                     </a>
-
-                    <div class="navbar-dropdown is-right">
-                        <a class="navbar-item">
-                            Who we are
-                        </a>
-
-                        <a class="navbar-item">
-                            Our Team
-                        </a>
-                    </div>
-                </div>
-
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link">
-                        More
-                    </a>
-
-                    <div class="navbar-dropdown is-right">
-                        <a class="navbar-item">
-                            Contact
-                        </a>
-
-                        <a class="navbar-item">
-                            Documents
-                        </a>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
