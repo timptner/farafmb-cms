@@ -5,43 +5,51 @@
 {% block body_class %}template-blogpage{% endblock %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
-    <p class="meta">{{ page.date }}</p>
+    <div class="container is-max-desktop">
+        <h1 class="title is-1">{{ page.title }}</h1>
+        <p class="subtitle">{{ page.date }}</p>
 
-    {% with categories=page.categories.all %}
-        {% if categories %}
-            <h3>Posted in:</h3>
-            <ul>
-                {% for category in categories %}
-                    <li style="display: inline">
-                        {% image category.icon fill-32x32 style="vertical-align: middle" %}
-                        {{ category.name }}
-                    </li>
+        <div class="block">
+            {% with categories=page.categories.all %}
+                {% if categories %}
+                    <p class="mb-1">Gepostet in:</p>
+                    <ul class="ml-3">
+                        {% for category in categories %}
+                            <li style="display: inline">
+                                {% image category.icon fill-32x32 style="vertical-align: middle" %}
+                                {{ category.name }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <div class="block">
+            <p>{{ page.intro }}</p>
+        </div>
+
+        <div class="content">
+            {{ page.body|richtext }}
+        </div>
+
+        {% for item in page.gallery_images.all %}
+            <div class="block">
+                <figure class="image">
+                    {% image item.image fill-960x480 %}
+                </figure>
+                <p class="has-text-centered">{{ item.caption }}</p>
+            </div>
+        {% endfor %}
+
+        {% if page.tags.all %}
+            <div class="tags">
+                {% for tag in page.tags.all %}
+                    <span class="tag">{{ tag }}</span>
                 {% endfor %}
-            </ul>
+            </div>
         {% endif %}
-    {% endwith %}
 
-    <div class="intro">{{ page.intro }}</div>
-
-    {{ page.body|richtext }}
-
-    {% for item in page.gallery_images.all %}
-        <div style="float: left; margin: 10px">
-            {% image item.image fill-320x240 %}
-            <p>{{ item.caption }}</p>
-        </div>
-    {% endfor %}
-
-    {% if page.tags.all.count %}
-        <div class="tags">
-            <h3>Tags</h3>
-            {% for tag in page.tags.all %}
-                <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button type="button">{{ tag }}</button></a>
-            {% endfor %}
-        </div>
-    {% endif %}
-
-    <p><a href="{{ page.get_parent.url }}">Return to blog</a></p>
-
+        <a class="button" href="{{ page.get_parent.url }}">Zur Übersicht</a>
+    </div>
 {% endblock %}

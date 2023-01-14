@@ -50,7 +50,16 @@ class BlogCategory(models.Model):
 class BlogPage(Page):
     date = models.DateField('Post date')
     intro = models.CharField(max_length=250)
-    body = RichTextField(blank=True)
+    body = RichTextField(
+        features=[
+            'h2', 'h3', 'h4', 'h5', 'h6',
+            'bold', 'italic',
+            'ol', 'ul',
+            'hr',
+            'link',
+        ],
+        blank=True,
+    )
     tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
     categories = ParentalManyToManyField('blog.BlogCategory', blank=True)
 
